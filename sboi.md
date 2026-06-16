@@ -30,8 +30,8 @@ classDiagram
     }
 
     Failure --> FailureType : has
-    ReportMaker --> Device : uses
-    ReportMaker --> Failure : uses
+    ReportMaker ..> Device : uses
+    ReportMaker ..> Failure : uses
 
     style ReportMaker fill:#2d3747,stroke:#4a5568,stroke-width:2px,color:#fff
     style Device fill:#1a364d,stroke:#2b6cb0,stroke-width:2px,color:#fff
