@@ -2,6 +2,20 @@
 classDiagram
     direction TB
 
+    class IMoveCommand {
+        <<interface>>
+    }
+
+    class IShooterMoveCommand {
+        <<interface>>
+    }
+
+    class ShooterCommand {
+    }
+
+    class BuilderCommand {
+    }
+
     class IRobotAI~out TCommand~ {
         <<interface>>
         +GetCommand() TCommand
@@ -42,26 +56,35 @@ classDiagram
     }
 
     class RobotFactory {
-        +Create~TCommand~(IRobotAI~TCommand~ ai, IDevice~TCommand~ executor)\$ Robot~TCommand~
+        +Create~TCommand~(IRobotAI~TCommand~ ai, IDevice~TCommand~ executor) Robot~TCommand~\$
     }
+
+    IMoveCommand <|-- IShooterMoveCommand
+    IMoveCommand <|.. BuilderCommand
+    IShooterMoveCommand <|.. ShooterCommand
 
     IRobotAI <|.. ShooterAI
     IRobotAI <|.. BuilderAI
+    
     IDevice <|.. Device
-    Device <|-- Mover
-    Device <|-- ShooterMover
+    IDevice <|.. Mover
+    IDevice <|.. ShooterMover
 
     Robot --> IRobotAI : controls
     Robot --> IDevice : dispatches
     RobotFactory ..> Robot : creates
 
-    style IRobotAI fill:#48b0d6,stroke-width:2px,color:#fff
-    style IDevice fill:#48b0d6,,stroke-width:2px,color:#fff
-    style Device fill:#48b0d6,stroke-width:2px,color:#fff
-    style ShooterAI fill:#48b0d6,stroke-width:1px,color:#fff
-    style BuilderAI fill:#48b0d6,stroke-width:1px,color:#fff
-    style Mover fill:#48b0d6,stroke-width:1px,color:#fff
-    style ShooterMover fill:#48b0d6,stroke-width:1px,color:#fff
-    style Robot fill:#48b0d6,stroke-width:2px,color:#fff
-    style RobotFactory fill:#48b0d6,stroke-width:1px,color:#fff
+    style IMoveCommand fill:#dd57b1,stroke:#a12679,stroke-width:2px,color:#fff
+    style IShooterMoveCommand fill:#dd57b1,stroke:#a12679,stroke-width:2px,color:#fff
+    style ShooterCommand fill:#dd57b1,stroke:#a12679,stroke-width:1px,color:#fff
+    style BuilderCommand fill:#dd57b1,stroke:#a12679,stroke-width:1px,color:#fff
+    style IRobotAI fill:#dd57b1,stroke:#a12679,stroke-width:2px,color:#fff
+    style IDevice fill:#dd57b1,stroke:#a12679,stroke-width:2px,color:#fff
+    style Device fill:#dd57b1,stroke:#a12679,stroke-width:2px,color:#fff
+    style ShooterAI fill:#dd57b1,stroke:#a12679,stroke-width:1px,color:#fff
+    style BuilderAI fill:#dd57b1,stroke:#a12679,stroke-width:1px,color:#fff
+    style Mover fill:#dd57b1,stroke:#a12679,stroke-width:1px,color:#fff
+    style ShooterMover fill:#dd57b1,stroke:#a12679,stroke-width:1px,color:#fff
+    style Robot fill:#dd57b1,stroke:#a12679,stroke-width:2px,color:#fff
+    style RobotFactory fill:#dd57b1,stroke:#a12679,stroke-width:1px,color:#fff
 ```
